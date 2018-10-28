@@ -18,8 +18,8 @@ In example_script.py, we use return data from example_returndata.csv to define t
 4. A scalar risk aversion parameter
 5. tau: a scalar parameter that weights the covariance matrix
 6. tauv: a scalar parameter that weights the manager's views
-7. P: a numpy matrix expressing the types of the manager's views. See explanation below. P should have dimensions KxN, where K is the number of views and N is the number of asset classes
-8. Q: a numpy matrix expressing the quantities of the manager's views. See explanation below. Q should have dimensions Kx1, where K is the number of views
+7. P: a numpy matrix expressing the types of the manager's views. See 'Example parameters' below for an explanation. P should have dimensions KxN, where K is the number of views and N is the number of asset classes
+8. Q: a numpy matrix expressing the quantities of the manager's views. See 'Example parameters' below for an explanation. Q should have dimensions Kx1, where K is the number of views
 9. An optional identifier, which can be a string or a scalar
 
 #### Example parameters:
