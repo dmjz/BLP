@@ -44,3 +44,9 @@ model_one = BLP.Model.fromPriorData(
 )
 ```
 (the covariance matrix is a pandas DataFrame with values `[[0.001846, 0.001599, 0.002031], [0.001599, 0.002438, 0.002393], [0.002031, 0.002393, 0.004383]]`)
+
+P and Q express the views. Each row of P and Q represents a view about the performance of the asset classes in the near future. Views can be absolute or relative.
+
+For example, the first rows of P and Q are `[1,0,0]` and `[0.015]`. This corresponds to the view that "US Equity (the first column) will earn 1.5% excess returns". This is an absolute view - it pertains to the absolute performance of one asset class.
+
+The second rows of P and Q are `[0,1,-1]` and `[0.03]`. This corresponds to the view that "Foreign EQ (the second column) will outperform Emerging EQ (the third column) by 3%". This is a relative view - it pertains to the relative performance of two asset classes.
