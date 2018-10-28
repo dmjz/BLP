@@ -50,3 +50,49 @@ P and Q express the views. Each row of P and Q represents a view about the perfo
 For example, the first rows of P and Q are `[1,0,0]` and `[0.015]`. This corresponds to the view that "US Equity (the first column) will earn 1.5% excess returns". This is an absolute view - it pertains to the absolute performance of one asset class.
 
 The second rows of P and Q are `[0,1,-1]` and `[0.03]`. This corresponds to the view that "Foreign EQ (the second column) will outperform Emerging EQ (the third column) by 3%". This is a relative view - it pertains to the relative performance of two asset classes.
+
+#### Model results
+
+To access the optimal portfolio, use Model.optimalPortfolio:
+```python
+print(model.optimalPortfolio)
+{
+    'weights': [0.6264713805169178, 0.7083398924977391, -0.33481127301465685],
+    'returns': 0.0072094451581498666, 
+    'sd': 0.044395302498840196, 
+    'sharpe': 0.16239207196162725
+}
+```
+
+To access the expected returns and covariance matrix of the estimated distribution of excess returns, use Model.posteriorDistribution():
+```python
+estReturns, estCov = model.posteriorDistribution()
+print(estReturns)
+[0.00617828 0.00746541 0.00582155]
+print(estCov)
+[[0.00193794 0.00167853 0.00213255]
+ [0.00167853 0.00260806 0.00256085]
+ [0.00213255 0.00256085 0.00465072]]
+```
+
+To access a pandas DataFrame containing all information about the parameters and results of the model, use Model.df:
+```python
+print(model.df)
+                                           0           1            2         3       4         5
+Model Identifier                           1         NaN         None       NaN    None       NaN
+Prior weights                            0.5         0.4          0.1       NaN    None       NaN
+Parameters                     Risk aversion           3          Tau  0.100000    Tauv  0.100000
+P                                  US Equity  Foreign EQ  Emerging EQ       NaN     NaN       NaN
+View 0                                     1           0            0       NaN     NaN       NaN
+View 1                                     0           1           -1       NaN     NaN       NaN
+Q                                        NaN         NaN          NaN       NaN     NaN       NaN
+View 0                                 0.015         NaN          NaN       NaN     NaN       NaN
+View 1                                  0.03         NaN          NaN       NaN     NaN       NaN
+Posterior expected returns        0.00617828  0.00746541   0.00582155       NaN     NaN       NaN
+Posterior covariance matrix        US Equity  Foreign EQ  Emerging EQ       NaN     NaN       NaN
+US Equity                         0.00193794  0.00167853   0.00213255       NaN     NaN       NaN
+Foreign EQ                        0.00167853  0.00260806   0.00256085       NaN     NaN       NaN
+Emerging EQ                       0.00213255  0.00256085   0.00465072       NaN     NaN       NaN
+Optimal weights                     0.626471     0.70834    -0.334811       NaN    None       NaN
+Optimal portfolio metrics    Expected return  0.00720945           Sd  0.044395  Sharpe  0.162392
+```
