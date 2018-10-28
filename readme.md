@@ -43,3 +43,4 @@ model_one = BLP.Model.fromPriorData(
     identifier=1
 )
 ```
+(the covariance matrix is a pandas DataFrame with values `[[0.001846, 0.001599, 0.002031], [0.001599, 0.002438, 0.002393], [0.002031, 0.002393, 0.004383]]`)
