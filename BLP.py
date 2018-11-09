@@ -55,14 +55,16 @@ class Parameters:
         self.SigmaP = self.computePostVariance()
         
     def computeOmega(self):
-        #Omega = tauv*P*Sigma*P_T
-        return self.tauv*(np.dot(np.dot(self.P, self.Sigma), self.P.T))
+        #Omega = tauv*P*Sigma*P_T, with nondiagonal entries set to 0
+        return np.diag(np.diag(
+            self.tauv*(np.dot(np.dot(self.P, self.Sigma), self.P.T))
+        ))
     
     def computePostReturns(self):
-        #PiHat = Pi + (tau*Sigma*P_T) * [(P*Sigma*P_T)+Omega]^(-1) * [Q - P*Pi]
+        #PiHat = Pi + (tau*Sigma*P_T) * [(tau*P*Sigma*P_T)+Omega]^(-1) * [Q - P*Pi]
         #      = Pi + a * b^(-1) * c
         a = self.tau*np.dot(self.Sigma, self.P.T)
-        b = np.dot(np.dot(self.P, self.Sigma), self.P.T) + self.Omega
+        b = self.tau*np.dot(np.dot(self.P, self.Sigma), self.P.T) + self.Omega
         c = self.Q - np.dot(self.P, self.Pi)
         return self.Pi + np.dot(np.dot(a, np.linalg.inv(b)), c)
         

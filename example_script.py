@@ -8,17 +8,15 @@ import BLP
 def readDataToFrame(filename, keepColumns):
     print('Reading data from "' + filename + '"...')
     with open(filename) as csvfile:
-        readCols = {}
-        for colName in keepColumns:
-            readCols[colName] = []
         
+        readCols = {colname: [] for colname in keepColumns}
         reader = csv.DictReader(csvfile)
         for row in reader:
             for colName in readCols:
                 if colName in row:
                     readCols[colName].append(row[colName])
-        
         df = pd.DataFrame(readCols)
+        
         print('Done.')
         return df.apply(pd.to_numeric)
         
