@@ -1,43 +1,23 @@
-import csv
 from collections import OrderedDict
 import pandas as pd
 import numpy as np
-import BLP
-        
-        
-def readDataToFrame(filename, keepColumns):
-    print('Reading data from "' + filename + '"...')
-    with open(filename) as csvfile:
-        
-        readCols = {colname: [] for colname in keepColumns}
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            for colName in readCols:
-                if colName in row:
-                    readCols[colName].append(row[colName])
-        df = pd.DataFrame(readCols)
-        
-        print('Done.')
-        return df.apply(pd.to_numeric)
+from BLP import Model
+      
         
 def writeResults(filename, models):
-    print('Writing output to "' + filename + '"...')
     writeDf = pd.concat([models[0].framer.prior] + [m.df for m in models])
     writeDf.to_csv(filename, header=False)
-    print('Done.')
     
-
-# Setup:
 assetInfo = {'US Equity': 0.5, 'Foreign EQ': 0.4, 'Emerging EQ': 0.1}
 assetClasses = list(assetInfo.keys())
 assetWeights = list(assetInfo.values())  
 
-data = readDataToFrame('example_returndata.csv', keepColumns=assetClasses)
+data = pd.read_csv('example_returndata.csv', usecols=assetClasses)
 covMatrix = data.cov()
 
-# Models:
 print('Computing models...')
-model_one = BLP.Model.fromPriorData(
+
+model_one = Model.fromPriorData(
     assetClasses, 
     assetWeights, 
     riskAversion=3, 
@@ -48,7 +28,7 @@ model_one = BLP.Model.fromPriorData(
     Q=np.asarray([[0.015],[0.03]]),
     identifier=1
 )
-model_two = BLP.Model.fromPriorData(
+model_two = Model.fromPriorData(
     assetClasses, 
     assetWeights, 
     riskAversion=3, 
@@ -59,7 +39,7 @@ model_two = BLP.Model.fromPriorData(
     Q=np.asarray([[0.015],[0.03]]),
     identifier=2
 )
-model_three = BLP.Model.fromPriorData(
+model_three = Model.fromPriorData(
     assetClasses, 
     assetWeights, 
     riskAversion=3, 
@@ -71,8 +51,8 @@ model_three = BLP.Model.fromPriorData(
     identifier=3
 )
 models = (model_one, model_two, model_three)
-print('Done.')
+outFile = 'new_example_output.csv'
+writeResults(outFile, models)
 
-# Write results:
-writeResults('new_example_output.csv', models)
-        
+print('Done.')
+print(f'Check the model results in { outFile }')
