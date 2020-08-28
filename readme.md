@@ -2,6 +2,8 @@
 
 ![Black-Litterman model](docs/blp.PNG)
 
+Source: Idzorek, T. M. (2004, July 20). A STEP-BY-STEP GUIDE TO THE BLACK-LITTERMAN MODEL.
+
 ## A portfolio optimizer based on the Black-Litterman model
 
 (Note: "returns" always refers to returns in excess of the risk-free rate)
