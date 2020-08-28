@@ -1,5 +1,7 @@
 # BLP
 
+![Black-Litterman model](docs/blp.PNG)
+
 ## A portfolio optimizer based on the Black-Litterman model
 
 (Note: "returns" always refers to returns in excess of the risk-free rate)
@@ -10,6 +12,18 @@ BLP.py provides the Model class to implement the B-L model and determine the opt
 
 In example_script.py, we use return data from example_returndata.csv to define three models, with the same asset classes and prior weights but different parameters, and print the model information and computed optimal weights to example_output.csv.
 
+## To install
+
+You will need [Python 3](https://www.python.org/downloads/) with [pip](https://pip.pypa.io/en/stable/installing/).
+
+1. Clone this github repo OR download and unzip this repo
+2. Go the downloaded project directory and run: ```pip install -r .\requirements.txt```
+3. To test, run: ```python example_script.py```
+4. You should see a new file: new_example_output.csv
+5. Verify that new_example_output.csv matches example_output.csv
+
+
+## Model inputs and results
 
 #### Parameters to define a Model:
 1. A list of asset classes
