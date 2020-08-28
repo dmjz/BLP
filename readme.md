@@ -93,22 +93,6 @@ print(estCov)
 
 To access a pandas DataFrame containing all information about the parameters and results of the model, use Model.df:
 ```python
-print(model.df)
-                                           0           1            2         3       4         5
-Model Identifier                           1         NaN         None       NaN    None       NaN
-Prior weights                            0.5         0.4          0.1       NaN    None       NaN
-Parameters                     Risk aversion           3          Tau  0.100000    Tauv  0.100000
-P                                  US Equity  Foreign EQ  Emerging EQ       NaN     NaN       NaN
-View 0                                     1           0            0       NaN     NaN       NaN
-View 1                                     0           1           -1       NaN     NaN       NaN
-Q                                        NaN         NaN          NaN       NaN     NaN       NaN
-View 0                                 0.015         NaN          NaN       NaN     NaN       NaN
-View 1                                  0.03         NaN          NaN       NaN     NaN       NaN
-Posterior expected returns        0.00617828  0.00746541   0.00582155       NaN     NaN       NaN
-Posterior covariance matrix        US Equity  Foreign EQ  Emerging EQ       NaN     NaN       NaN
-US Equity                         0.00193794  0.00167853   0.00213255       NaN     NaN       NaN
-Foreign EQ                        0.00167853  0.00260806   0.00256085       NaN     NaN       NaN
-Emerging EQ                       0.00213255  0.00256085   0.00465072       NaN     NaN       NaN
-Optimal weights                     0.626471     0.70834    -0.334811       NaN    None       NaN
-Optimal portfolio metrics    Expected return  0.00720945           Sd  0.044395  Sharpe  0.162392
+model.df.to_csv('model_results.csv')
 ```
+![model_result_csv](docs/model_result_csv.PNG)
